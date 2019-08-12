@@ -8,7 +8,7 @@
 """
 
 from .solutions import results
-from .code.Solve8queens import Solver
+from 8queensChallenge.code.Solve8queens import Solver
 
 class TestSolver():
     """
