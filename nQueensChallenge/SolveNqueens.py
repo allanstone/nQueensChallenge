@@ -8,6 +8,8 @@
 """
 
 from BackTrackAlgo import BackTrack
+from db import DatabaseSession
+from models import Results
 from utils import timing
 
 class Solver(object):
@@ -15,13 +17,12 @@ class Solver(object):
         Solver class for resolve the n Queens puzzle
     '''
     def __init__(self, algorithm, boardSize):
-        '''
-           General Solver constructor
-        '''
         self.__algorithm = algorithm
         self.__boardSize = boardSize
 
-    @timing
+    def set_boardSize(self, boardSize):
+        self.__boardSize = boardSize
+
     def call_solver(self, solver):
         print('Resolving {0}x{0} queens board with: {1}'.format(
             self.__boardSize, self.__algorithm))
@@ -31,20 +32,38 @@ class Solver(object):
 class BackTrackSolver(Solver):
     '''
         BackTrackSolver class for resolve the n Queens puzzle
-        implementing BackTrack algorithm
+        implementing BackTrack algorithm and save in the db
     '''
-    def __init__(self, boardSize):
-        '''
-           General Solver class
-        '''
-        super(BackTrackSolver, self).__init__('Backtracking', boardSize)
-        self.__solver = BackTrack(boardSize)
+    def __init__(self, boardSize=0):
+        self.__dbs = DatabaseSession()
+        self.__algorithm = 'Backtracking'
+        super().__init__(self.__algorithm, boardSize)
 
-    def solve(self):
-        return super(BackTrackSolver, self).call_solver(self.__solver)
+    def __repr__(self):
+        return self.__algorithm
+
+    def save_to_db(self, boardSize, solutions, boards):
+        '''Save result of execution to db'''
+        result_model = Results(
+            boardSize = boardSize,
+            solutions = solutions,
+            boards = boards)
+        self.__dbs.save(result_model)
+
+    def solve(self, size):
+        '''Solve the puzzel for n queens'''
+        return super(BackTrackSolver, self).call_solver(BackTrack(size))
+
+    def solve_to_n(self, n):
+        '''Solve the puzzel for n queens'''
+        for size in range(1, n+1):
+            self.set_boardSize(size)
+            solutions, boards = self.solve(size)
+            self.save_to_db(size, solutions, boards)
 
 if __name__ == "__main__":
-    bs = BackTrackSolver(4)
-    r = bs.solve()
-    print(r)
+    from db import recreate_database, Base
+    recreate_database()
+    bs = BackTrackSolver()
+    bs.solve_to_n(4)
 

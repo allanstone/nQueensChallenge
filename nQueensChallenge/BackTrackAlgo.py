@@ -78,7 +78,7 @@ class BackTrack(object):
 
 if __name__ == "__main__":
     # run as standalone script
-    import sys
+    import sys, traceback
     try:
         if len(sys.argv) < 2:
             print('To few arguments, please specify a board size')
