@@ -6,11 +6,13 @@
 .. moduleauthor:: agarrido
 :synopsis: Testing module for testing SolveNqueens module.
 """
+import sys, os
+myPath = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, myPath + '/../')
 
-from ..SolveNqueens import Solver
+from ..SolveNqueens import Solver, BackTrackSolver
 from ..utils import SOLUTIONS
-from ..BackTrackAlgo import BackTrack
-
+from ..db import Base
 
 class TestSolver():
     """
@@ -21,14 +23,21 @@ class TestSolver():
         """
         Setup for test Solver
         """
-        self.solv = Solver()
-        self.lower_bounds = range(1,9)
+        self.boardSize = 0
+        self.algorithm = None
+        self.solver = Solver(self.boardSize, self.algorithm)
 
     def test_instance(self):
-        assert isinstance(self.solv, Solver)
+        assert isinstance(self.solver, Solver)
 
-#    def test_results(self, boardSize):
-#        assert self.solver(boardSize)[0] == SOLUTIONS[boardSize]
-
-
-    def test_lower_bounds()
+    def test_solve(self, boardSize):
+        assert self.solver.call_solver()
+#
+#class TestBackTrackSolver():
+#
+#    def setup_class(self):
+#        self.bkts = 0
+#        self.lower_bounds = range(1,9)
+#
+#    def test_lower_bounds():
+#        assert True == True

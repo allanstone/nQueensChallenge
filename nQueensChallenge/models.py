@@ -31,5 +31,5 @@ class Results(Base):
     boards =  Column(postgresql.ARRAY(Integer))
 
     def __repr__(self):
-        return "<Result(boardSize='{0}x{0}', solutions='{1}', boars={2})>"\
+        return "<Result(boardSize='{0}x{0}', solutions='{1}', boards={2})>"\
                 .format(self.boardSize, self.solutions, self.boards)

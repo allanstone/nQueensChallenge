@@ -14,7 +14,7 @@ from sqlalchemy import create_engine
 
 from config import DATABASE_URI
 from models import Base, Results
-from contextlib import contextmanager
+
 from functools import wraps
 
 # Creating a thread safe session factory
@@ -67,6 +67,11 @@ class DatabaseSession(object):
         session.add(model)
 
     @dbconnect
+    def query(self,model,session):
+        for row in session.query(model).all():
+            print(row)
+
+    @dbconnect
     def destroy(self,model,session):
         session.delete(model)
 
@@ -80,9 +85,5 @@ if __name__ == '__main__':
     )
     dbs = DatabaseSession()
     dbs.save(result)
+    dbs.query(Results)
     dbs.destroy(result)
-#    with session_scope() as s:
-#        s.add(result)
-
-
-

@@ -7,14 +7,15 @@
 :synopsis: Core module for solving the 8 queens puzzle problem
 """
 
-from BackTrackAlgo import BackTrack
-from db import DatabaseSession
-from models import Results
-from utils import timing
+from .BackTrackAlgo import BackTrack
+from .db import DatabaseSession
+from .models import Results
+from .utils import timing
 
 class Solver(object):
     '''
         Solver class for resolve the n Queens puzzle
+        This is the main class for the whole project
     '''
     def __init__(self, algorithm, boardSize):
         self.__algorithm = algorithm

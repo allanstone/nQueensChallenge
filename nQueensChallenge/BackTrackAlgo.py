@@ -26,7 +26,7 @@ class BackTrack(object):
         Solve the n queens and return the number of solutions and positions
         """
         if self.size < 1:
-            return self.solutions, self.boards #Not posible solutions
+            return self.solutions, self.boards #Not possible solutions
         positions = [-1] * self.size
         self.put_queen(positions, 0)
         return self.solutions, self.boards
