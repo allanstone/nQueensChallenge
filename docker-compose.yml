@@ -1,0 +1,20 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.6-alpine
+    environment:
+      - POSTGRES_PASSWORD=post1234
+      - POSTGRES_USER=agarrido
+      - POSTGRES_DB=nQueensChallenge
+
+  nQueensChallenge:
+    image: crowdcomms/pytest-sqlalchemy
+    build:
+      context: .
+    volumes:
+      - .:/code
+    working_dir: /code
+    environment:
+      - DATABASE_URL=postgres://mable:1234@db:5432/mable
+    links:
+      - db:db

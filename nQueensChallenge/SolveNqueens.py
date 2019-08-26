@@ -7,10 +7,10 @@
 :synopsis: Core module for solving the 8 queens puzzle problem
 """
 
-from .BackTrackAlgo import BackTrack
-from .db import DatabaseSession
-from .models import Results
-from .utils import timing
+from BackTrackAlgo import BackTrack
+from db import DatabaseSession
+from models import Results
+from utils import timing
 
 class Solver(object):
     '''
@@ -63,7 +63,7 @@ class BackTrackSolver(Solver):
             self.save_to_db(size, solutions, boards)
 
 if __name__ == "__main__":
-    from db import recreate_database, Base
+    from db import recreate_database
     recreate_database()
     bs = BackTrackSolver()
     bs.solve_to_n(4)
