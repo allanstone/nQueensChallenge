@@ -5,10 +5,8 @@
 venv=venv/bin/activate
 if [ -f "$venv" ]
 then
-    echo the file exists
     source $venv
 else
-    echo the file does not exist
     virtualenv venv -p `which python3`
 fi
 # run all unitest 

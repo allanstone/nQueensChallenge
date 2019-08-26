@@ -7,9 +7,12 @@ def test_connection(connection):
     # automatically when the scope (module) of the fixtures ends.
     assert connection
 
+def test_create_schema(engine):
+    Base.metadata.create_all(engine)
+    assert engine.dialect.has_table(engine,'results')
+
 def test_truncate(truncate_db,dbsession):
     assert dbsession.query(Results).count() == 0
-
 
 def test_create_result(dbsession):
     result = Results(
