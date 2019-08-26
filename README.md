@@ -1,12 +1,11 @@
 nQueensChallenge
 ================
+[![Build Status](https://travis-ci.com/allanstone/nQueensChallenge.svg?branch=master)](https://travis-ci.com/allanstone/nQueensChallenge)
+![PyPI - Python Version](python-secrets)
 
 This project resolves the eight queens puzzle: [problem description](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
 It uses a Postgres db to store the results wrapped by SqlAlchemy API, tested via pytest module and some plugins for db fixtures and mocking.
 Also it it integrate travisc for CI, alembic for migrations and all the solution is dockerized with docker compose
-
-	 skeleton with working sqlalchemy connections tests and migrations framework already set up.
-Basically it's good entry point to develop every kind of sqlalchemy powered api using hug.
 
 ## Prerequisites
 It runs only with Python 3
