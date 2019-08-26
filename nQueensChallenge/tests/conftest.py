@@ -10,6 +10,7 @@
 
 import pytest
 import sqlalchemy_utils.functions
+from sqlalchemy.engine import create_engine
 
 
 @pytest.fixture(scope="session")
@@ -20,10 +21,8 @@ def engine(request, sqlalchemy_connect_url, config_file):
     :returns: Engine instance
     """
     if config_file:
-        from sqlalchemy.engine import create_engine
         engine = create_engine(config_file)
     elif sqlalchemy_connect_url:
-        from sqlalchemy.engine import create_engine
         engine = create_engine(sqlalchemy_connect_url)
     else:
         raise RuntimeError("Can not establish a connection to the database")

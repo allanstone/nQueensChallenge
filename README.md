@@ -1,26 +1,38 @@
 nQueensChallenge
 ================
 [![Build Status](https://travis-ci.com/allanstone/nQueensChallenge.svg?branch=master)](https://travis-ci.com/allanstone/nQueensChallenge)
-![PyPI - Python Version](python-secrets)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/python-secrets)
+[![Code style:
+black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-This project resolves the eight queens puzzle: [problem description](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
+This project resolves the eight queens puzzle: [problem description](https://en.wikipedia.org/wiki/Eight_queens_puzzle).
 It uses a Postgres db to store the results wrapped by SqlAlchemy API, tested via pytest module and some plugins for db fixtures and mocking.
-Also it it integrate travisc for CI, alembic for migrations and all the solution is dockerized with docker compose
+Also it it uses Travis for CI, alembic for migrations and all the solution is dockerized within docker compose.
 
 ## Prerequisites
-It runs only with Python 3
+You can run the Backtracking algorithm with Python 3 or install as a whole with docker-compose
+* pytest, sqlalchemy, psycopg2 
 
 ## Installation
+``
+git clone https://github.com/allanstone/nQueensChallenge.git .
+pip install -r requirements.txt
+# run as standalone script without db
+python nQueensChallenge/BackTrackAlgo.py <number-of-queens>
+``
+## Installation with Docker
 ``
 git clone https://github.com/FutureMind/hug-sqlalchemy-template.git
 pip install -r requirements.txt
 python nQueensChallenge/Solvenqueens.py
 ``
-API will be exposed locally to http://127.0.0.1:8000
 
 ## Database
-Provide SQLALCHEMY_DATABASE_URI and TEST_SQLALCHEMY_DATABASE_URI environment variables.
-If TEST_SQLALCHEMY_DATABASE_URI is not provided it will be automatically set to SQLALCHEMY_DATABASE_URI + '_test' suffix
+The database url is configured on ``config.py`` it can be easily changed for production
+``
+# Scheme: "postgres+psycopg2://<USERNAME>:<PASSWORD>@<IP_ADDRESS>:<PORT>/<DATABASE_NAME>"
+DATABASE_URI = 'postgres+psycopg2://postgres:post123@localhost:5432/testdb'
+``
 
 ## Migrations
 Project uses alembic to manage migrations script
@@ -37,14 +49,16 @@ alembic upgrade head
 ``
 
 ## Tests
-Put your tests into tests module.
-Run your tests with
+Running the tests, using diferent flags from the fixtures, aviod warning due 'postgres' dialect name has been renamed to 'postgresql'
 ``
-python -m pytest
+py.test  nQueensChallenge/tests/ --sqlalchemy-connect-url="postgres+psycopg2://postgres:post123@localhost:5432/testdb" -p no:warnings -v
+py.test --sqlalchemy-config-file nQueensChallenge/tests/test_db.py  -p no:warnings -v
+py.test  nQueensChallenge/tests/test_db.py  -p no:warnings -v
+
 ``
 
-## Examples
-You can see some basic examples of how set up models, authentication and routes on `user_jwt_auth_example_project` branch
-
-There is also an example how to implement application factory (just like we do in flask http://flask.pocoo.org/docs/0.12/patterns/appfactories/) on `app_constructor_example`
+## Optimizations
+* Add code coverage with coveralls or codecov
+* Use a tool like tox-travis to test diferent python versions
+* Deploy a more consistent architecture for microservices (e.g using kubernetes or docker swarm)
 
