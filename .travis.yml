@@ -11,7 +11,7 @@ install:
     - pip install -r requirements.txt
 before_script:
   - psql -c 'create database testdb;' -U postgres
-  - psql -c 'ALTER USER postgres WITH PASSWORD 'post123';' -U postgres
+  - psql -c "ALTER USER postgres WITH PASSWORD 'post123';" -U postgres
 script:
     - py.test nQueensChallenge/tests/ -p no:warnings -v
 

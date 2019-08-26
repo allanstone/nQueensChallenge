@@ -5,7 +5,7 @@ nQueensChallenge
 [![Code style:
 black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-This project resolves the eight queens puzzle: [problem description](https://en.wikipedia.org/wiki/Eight_queens_puzzle).
+This project resolves the eight queens puzzle: [problem description](https://en.wikipedia.org/wiki/Eight_queens_puzzle).<br/>
 It uses a Postgres db to store the results wrapped by SqlAlchemy API, tested via pytest module and some plugins for db fixtures and mocking.
 Also it it uses Travis for CI, alembic for migrations and all the solution is dockerized within docker compose.
 
