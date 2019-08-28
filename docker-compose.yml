@@ -1,20 +1,18 @@
-version: '2'
+version: '3.3'
 services:
   db:
-    image: postgres:9.6-alpine
+    image: postgres:10-alpine
     environment:
-      - POSTGRES_PASSWORD=post1234
-      - POSTGRES_USER=agarrido
-      - POSTGRES_DB=nQueensChallenge
-
-  nQueensChallenge:
-    image: crowdcomms/pytest-sqlalchemy
+      - POSTGRES_PASSWORD=post123
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=testdb
+    ports:
+      - 5432:5432
+  app:
     build:
       context: .
-    volumes:
-      - .:/code
-    working_dir: /code
+      dockerfile: Dockerfile
     environment:
-      - DATABASE_URL=postgres://mable:1234@db:5432/mable
-    links:
-      - db:db
+      - DATABASE_URL=postgres+psycopg2://postgres:post123@db:5432/testdb
+    depends_on:
+      - db
