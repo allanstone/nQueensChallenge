@@ -15,24 +15,24 @@ You can run only the sollution algorithm with python3 or install as a whole with
 
 ## Installation
 I strongly recomend to use a virtual enviroment to install the
-``
+```
 git clone https://github.com/allanstone/nQueensChallenge.git .
 pip install -r requirements.txt #run as standalone script without db
 python main.py <number-of-queens>
-``
+```
 ## Installation with Docker
-``
+```
 git clone https://github.com/allanstone/nQueensChallenge.git
 cd nQueensChallenge/
 docker-compose up -d
 docker logs #results should be there!
-``
+```
 
 ## Database
 The database url is configured on ``config.py`` it can be easily changed for production or another db
-``
+```
 DATABASE_URI = 'postgres+psycopg2://postgres:post123@localhost:5432/testdb'
-``
+```
 
 ## Migrations
 Project uses alembic to manage migrations script
@@ -40,22 +40,22 @@ http://alembic.zzzcomputing.com/en/latest/
 
 ### Example usage 
 Add new migrations with
-``
+```
 alembic revision --autogenerate -m "migration name"
-``
+```
 Upgrade your database with
-``
+```
 alembic upgrade head
-``
+```
 
 ## Tests
 Running the tests, using diferent flags from the fixtures, aviod warning due 'postgres' dialect name has been renamed to 'postgresql'
-``
+```
 py.test  nQueensChallenge/tests/ --sqlalchemy-connect-url="postgres+psycopg2://postgres:post123@localhost:5432/testdb" -p no:warnings -v
 py.test --sqlalchemy-config-file nQueensChallenge/tests/test_db.py  -p no:warnings -v
 py.test  nQueensChallenge/tests/test_db.py  -p no:warnings -v
 
-``
+```
 
 ## Optimizations
 * Add code coverage with coveralls or codecov
