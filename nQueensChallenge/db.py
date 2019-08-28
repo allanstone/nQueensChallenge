@@ -12,8 +12,8 @@ from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-from config import DATABASE_URI
-from models import Base, Results
+from .config import DATABASE_URI
+from .models import Base, Results
 
 from functools import wraps
 
