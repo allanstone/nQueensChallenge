@@ -10,27 +10,27 @@ It uses a Postgres db to store the results wrapped by SqlAlchemy API, tested via
 Also it it uses Travis for CI, alembic for migrations and all the solution is dockerized within docker compose.
 
 ## Prerequisites
-You can run the Backtracking algorithm with Python 3 or install as a whole with docker-compose
+You can run only the sollution algorithm with python3 or install as a whole with [docker-compose](https://docs.docker.com/compose/install/)
 * pytest, sqlalchemy, psycopg2 
 
 ## Installation
+I strongly recomend to use a virtual enviroment to install the
 ``
 git clone https://github.com/allanstone/nQueensChallenge.git .
-pip install -r requirements.txt
-# run as standalone script without db
-python nQueensChallenge/BackTrackAlgo.py <number-of-queens>
+pip install -r requirements.txt #run as standalone script without db
+python main.py <number-of-queens>
 ``
 ## Installation with Docker
 ``
-git clone https://github.com/FutureMind/hug-sqlalchemy-template.git
-pip install -r requirements.txt
-python nQueensChallenge/Solvenqueens.py
+git clone https://github.com/allanstone/nQueensChallenge.git
+cd nQueensChallenge/
+docker-compose up -d
+docker logs #results should be there!
 ``
 
 ## Database
-The database url is configured on ``config.py`` it can be easily changed for production
+The database url is configured on ``config.py`` it can be easily changed for production or another db
 ``
-# Scheme: "postgres+psycopg2://<USERNAME>:<PASSWORD>@<IP_ADDRESS>:<PORT>/<DATABASE_NAME>"
 DATABASE_URI = 'postgres+psycopg2://postgres:post123@localhost:5432/testdb'
 ``
 
