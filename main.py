@@ -25,7 +25,7 @@ def main(args=None):
         print('Running test suite: ')
         import pytest
         pytest.main(["-p","no:warnings", "nQueensChallenge/tests/"])
-        sys.exit(0)
+        #sys.exit(0)
 
     if args.no_db:
         print('Running without storing results: ')

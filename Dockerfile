@@ -19,4 +19,4 @@ RUN chmod +x /usr/src/app/entrypoint.sh
 COPY . /usr/src/app
 # run server
 CMD ["/usr/src/app/entrypoint.sh"]
-CMD ["/bin/bash", "-c", "sleep 5 && python3 main.py"]
+CMD ["/bin/bash", "-c", "sleep 5 && python3 main.py -t"]
